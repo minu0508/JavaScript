@@ -1,4 +1,4 @@
-## Vaniila JS for beginners
+## Vaniila JS for beginners (24-05-08)
 
 <p> Nomard Coders YouTube를 시청하면서 Vanilla JS 기초를 연습할 수 있었습니다. <br>
   해당 연습 프로젝트는 현재 시간과 사용자의 위치를 가져오고 To-Do-List 기능을 구현하였습니다. <br>
