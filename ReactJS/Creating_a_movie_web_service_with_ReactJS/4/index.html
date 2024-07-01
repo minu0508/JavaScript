@@ -53,7 +53,7 @@
 				const [value, setValue] = React.useState("Save Changes");
 				const changeValue = () => setValue("Revert Changes");
 				return (
-					// onClick is not Event Listener when this in function -> 이름만 같게 했을 뿐이며, props를 의미한다.
+					// 여기 function에서 onClick은 이벤트 리스너가 아니다. -> 이름만 같게 했을 뿐이며, props를 의미한다.
 					<div>
 						<MemorizedBtn text = {value} onClick = {changeValue} fontSize = {18}/>
 						<MemorizedBtn text = "Continue" />
