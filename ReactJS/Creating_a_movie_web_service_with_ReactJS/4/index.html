@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+			/*
+			[props]
+			: 예로 들어서, App Function에서 Btn이라는 태그에다가 style = {backgroundColor: "red"}라고 했다고 한들
+			실제 Btn에 style을 넣는 것이 아니다. 인자값일 뿐이지 자동으로 값이 적용되는 방식이 아니며, 직접 작성해줘야 한다는 의미이다.
+
+			: 만약에, 특정 Component에는 존재하는 인자값이 어떤 Component에는 존재하지 않을 경우를 대비하고 싶다면,
+			Function에다가 Default Value를 따로 넣어주면 된다.
+			*/
+			function Btn({ text, onClick, fontSize = 16 }) {
+				console.log(text, "was rendered");
+				return (
+						<button
+							onClick = {onClick}
+							style = {{
+								backgroundColor: "tomato",
+								color: "white",
+								padding: "10px 20px",
+								border: 0,
+								borderRadius: 10,
+								fontSize,
+							}}
+						>
+							{text}
+						</button>
+				)
+			}
+
+			// 아래의 React.memo()는 props가 변경된. 즉, state가 변경된 경우에만 re-render 된다.
+			const MemorizedBtn = React.memo(Btn);
+
+			MemorizedBtn.propTypes = {
+				text: PropTypes.string,
+				fontSize: PropTypes.number,
+			};
+
+			function App() {
+				const [value, setValue] = React.useState("Save Changes");
+				const changeValue = () => setValue("Revert Changes");
+				return (
+					// onClick is not Event Listener when this in function -> 이름만 같게 했을 뿐이며, props를 의미한다.
+					<div>
+						<MemorizedBtn text = {value} onClick = {changeValue} fontSize = {18}/>
+						<MemorizedBtn text = "Continue" />
+					</div>
+				);
+			}
+
+			const root = document.getElementById("root");
+			ReactDOM.render(<App />, root);
+    </script>
+</html>
